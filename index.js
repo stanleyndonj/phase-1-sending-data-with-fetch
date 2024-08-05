@@ -1,25 +1,25 @@
-function submitData(name, email) {
-    return fetch("http://localhost:3000/users", {
-        method: "POST",
+function submitData(username, email) {
+    return fetch('http://localhost:3000/users', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email })
+        body: JSON.stringify({
+            name: username,
+            email: email
+        })
     })
-    .then(response => response.json())
-    .then(data => {
-        const newId = document.createElement('p');
-        newId.innerText = `ID: ${data.id}`;
-        document.body.appendChild(newId);
-    })
-    .catch(error => {
-        const errorMessage = document.createElement('p');
-        errorMessage.innerText = `Error: ${error.message}`;
-        document.body.appendChild(errorMessage);
-    });
+    .then(function (response) {
+         return response.json();
+     })
+     .then(function (object) {
+        document.body.innerHTML = object["id"]
+     })
+     .catch(function (error) {
+        document.body.innerHTML = error.message
+         console.log(error);
+     });
+  
 }
-
-
-
 
